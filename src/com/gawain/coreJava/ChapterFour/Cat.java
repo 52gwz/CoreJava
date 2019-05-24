@@ -1,8 +1,8 @@
 package com.gawain.coreJava.ChapterFour;
 
-public class Cat {
+public class Cat implements Comparable<Cat>,Cloneable {
     private String name;
-    private static int nextId;
+    private static int nextId;      //静态类和子类共享
     private int id = signId();      //初始值不一定是常量值。
 
 
@@ -33,6 +33,8 @@ public class Cat {
         return this.id;
     }
 
+    public String getName(){return name;}
+
     public void testDouble(double db) {
         System.out.println(db);
     }
@@ -40,19 +42,39 @@ public class Cat {
 
     @Override
     public boolean equals(Object obj) {      //Another
-        if(obj == null){
+        if (obj == null) {
             return false;
         }
-        if(this == obj){
+        if (this == obj) {
             System.out.println("等于自己");
             return true;
         }
-        if(this.getClass() != obj.getClass()){
+        if (this.getClass() != obj.getClass()) {
             System.out.println("不同类型");
             return false;
         }
         Cat other = (Cat) obj;
         return other.name.equals(name) && this.id == other.id;
+    }
+
+    @Override
+    public final int compareTo(Cat o) {
+        /**
+         * 如果存在这样一种通用算法 它能够对两个不同的子类对象进行比较
+         * 则应该在超 类中提供一个 compareTo 方法
+         * 并将这个方法声明为final
+         */
+        return Integer.compare(id, o.id);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
+    public String toString() {
+        return "猫名：" + name + " id：" + id;
     }
 }
 
