@@ -13,7 +13,7 @@ public class Cat implements Comparable<Cat>,Cloneable {
     public Cat() {
         //多个参数不同的构造器称为重载(Overloading)
         //创建对象时 编译器会找出合适的构造器 这个过程称为重载解析(Overloading Resolution)
-        this("不知名的小猫 love");
+        this("不知名的小猫");
     }
 
 
@@ -64,7 +64,7 @@ public class Cat implements Comparable<Cat>,Cloneable {
          * 则应该在超 类中提供一个 compareTo 方法
          * 并将这个方法声明为final
          */
-        return Integer.compare(id, o.id);
+        return Integer.compare(name.length(), o.name.length());
     }
 
     @Override
